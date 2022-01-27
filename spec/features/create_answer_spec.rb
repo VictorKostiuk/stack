@@ -6,10 +6,11 @@ feature 'User answer',  %q{
   I want to be able to create answers
 } do
 
-  given(:user) { FactoryBot.create(:user) }
-  given(:question) { FactoryBot.create(:question) }
+  let(:user) { FactoryBot.create(:user) }
+  let!(:question) { FactoryBot.create(:question) }
 
-  scenario 'Authenticated user create answer' do
+  scenario 'Authenticated user create answer', js: true do
+    binding.pry
     sign_in(user)
     visit question_path(question)
 
