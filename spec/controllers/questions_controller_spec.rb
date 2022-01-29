@@ -8,7 +8,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     it 'populates an array of all questions' do
-      expect(assigns(:questions)).to match_array(@questions)
+      expect(assigns(:questions)).to match_array(questions)
     end
 
     it 'renders index view' do

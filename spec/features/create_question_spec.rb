@@ -10,7 +10,7 @@ feature 'Create question', %q{
 
   scenario 'Authenticated user creates the question' do
 
-    sign_in(user)
+    log_in(user)
 
     visit questions_path
     click_on 'Ask question'

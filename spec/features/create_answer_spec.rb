@@ -6,15 +6,14 @@ feature 'User answer',  %q{
   I want to be able to create answers
 } do
 
-  let(:user) { FactoryBot.create(:user) }
-  let!(:question) { FactoryBot.create(:question) }
+  given(:user) { FactoryBot.create(:user) }
+  given!(:question) { FactoryBot.create(:question) }
 
   scenario 'Authenticated user create answer', js: true do
-    binding.pry
-    sign_in(user)
+    log_in(user)
     visit question_path(question)
 
-    fill_in 'Your answer', with: 'My answer'
+    fill_in 'My answer', with: 'My answer'
     click_on 'Create'
 
     expect(current_path).to eq question_path(question)

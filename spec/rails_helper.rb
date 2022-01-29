@@ -6,6 +6,8 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'support/feature_helpers'
+require 'selenium-webdriver'
+require 'support/database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -31,7 +33,15 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :selenium_chrome)
+end
+Capybara.current_driver = :selenium_chrome
+Capybara.javascript_driver = :selenium_chrome
+
 RSpec.configure do |config|
+  config.include Warden::Test::Helpers
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include ActionController, type: :feature
@@ -71,4 +81,5 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
 end

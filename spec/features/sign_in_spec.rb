@@ -4,12 +4,12 @@ feature 'User sign in', %q{
   I want to be able to sign in
 } do
 
-  given(:user) { FactoryBot.create(:user) }
+  given(:user) { FactoryBot.create(:user, password: '12345678', password_confirmation: '12345678') }
 
 
   scenario 'Registered user try to sign in' do
 
-    sign_in(user)
+    log_in(user)
 
     expect(page).to have_content 'Signed in successfully'
     expect(current_path).to eq root_path
