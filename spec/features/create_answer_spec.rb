@@ -21,5 +21,13 @@ feature 'User answer',  %q{
       expect(page).to have_content 'My answer'
     end
   end
+
+  scenario 'User try to create invalid answer', js: true do
+    log_in(user)
+    visit question_path(question)
+    click_on 'Create'
+
+    expect(page).to have_content "Answer's body can't be blank"
+  end
 end
 
