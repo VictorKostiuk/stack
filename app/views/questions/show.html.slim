@@ -6,8 +6,9 @@ p= @question.body
 .answers
   = render 'answers'
 
-  = form_for [@question, @answer], remote: true do |f|
+= form_for [@question, @answer], remote: true do |f|
+  p
     = f.label :body, 'My answer'
     .answer-errors
     = f.text_area :body
-    = f.submit 'Create'
+  p= f.submit 'Create'
